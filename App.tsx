@@ -1,8 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useFonts } from 'expo-font';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Login from './src/screens/Login';
+
+const Stack = createNativeStackNavigator()
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -12,18 +15,11 @@ export default function App() {
   if (!fontsLoaded) return null
 
   return (
-    <View style={styles.container}>
+    <NavigationContainer>
       <StatusBar style="auto" />
-      <Login></Login>
-    </View>
+      <Stack.Navigator>
+        <Stack.Screen name="Login" component={Login} options={{headerShown: false}} />
+      </Stack.Navigator>
+    </NavigationContainer> 
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
