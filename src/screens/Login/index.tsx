@@ -3,12 +3,15 @@ import {
   ImageBackground,
   Text,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import FA from '@expo/vector-icons/FontAwesome';
 
 import Input from '../../components/Input';
+
+import AuthService from '../../services/auth.service';
 
 import styles from './styles'
 
@@ -20,18 +23,10 @@ export default () => {
 
   const navigation = useNavigation()
 
-  const signIn = async () => {
-    // try {
-    //   const {data} = await axios.post(`${REACT_APP_BASE_URL}/signin`, {
-    //     email,
-    //     password,
-    //   });
-    //   AsyncStorage.setItem('userData', JSON.stringify(data));
-    //   axios.defaults.headers.common.Authorization = `Bearer ${data.token}`;
-    //   props.navigation.navigate('Home', data);
-    // } catch (e) {
-    //   Alert.alert('Deu ruim', 'Houve algum erro ao realizar o login');
-    // }
+  const signIn = () => {
+    AuthService.login('dsdsd', 'dsdsds')
+      .then(() => navigation.navigate('Home'))
+      .catch(() => Alert.alert('Deu ruim', 'Houve algum erro ao realizar o login'))
     console.log('Navigate to Home!')
   };
 

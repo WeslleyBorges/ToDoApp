@@ -6,8 +6,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Login from './src/screens/Login';
 import Register from './src/screens/Register';
+import Home from './src/screens/Home';
 
-import db from './src/services/db';
+import {initDB} from './src/database/init';
 
 const Stack = createNativeStackNavigator()
 
@@ -17,7 +18,7 @@ export default function App() {
   });
 
   useEffect(() => {
-    db.transaction(tx => tx.executeSql('CREATE TABLE IF NOT EXISTS user (id INTEGER PRIMARY KEY NOT NULL AUTOINCREMENT, name TEXT, password TEXT, email TEXT)'))
+    initDB()
   }, [])
 
   if (!fontsLoaded) return null
@@ -28,6 +29,7 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen name="Login" component={Login} options={{headerShown: false}} />
         <Stack.Screen name="Register" component={Register} options={{headerShown: false}} />
+        <Stack.Screen name="Home" component={Home} options={{headerShown: false}} />
       </Stack.Navigator>
     </NavigationContainer> 
   );
